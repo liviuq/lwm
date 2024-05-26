@@ -1,0 +1,20 @@
+# lwm (learn window manager)
+
+lwm is a window manager for learning purposes. It shares some functionality wiht suckless's dwm.
+
+# Building
+
+Building lwm requires X11 and Meson
+
+    $ git clone the repo
+    $ cd lwm
+    $ meson setup build
+    $ meson compile -C build
+    $ sudo meson install
+
+# Debugging lwm
+
+To debug, you need Xephyr.
+
+    $ Xephyr -br -ac -noreset -screen 1280x720 :2 &
+    $ DISPLAY=:2 gdb lwm

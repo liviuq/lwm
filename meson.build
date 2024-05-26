@@ -10,4 +10,10 @@ subdir('src')
 
 xlib_dep = dependency('X11')
 
-executable('lwm', sources: sources, install: true, dependencies: [xlib_dep])
+PREFIX = '/usr/local'
+executable(
+    'lwm',
+    sources: sources, 
+    install: true,
+    install_dir: PREFIX + '/bin',
+    dependencies: [xlib_dep])

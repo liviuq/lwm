@@ -9,27 +9,25 @@
 
 #include "logger.h"
 #include "window.h"
+#include "check.h"
 
-int main(int argc, char **argv)
+int
+main(int argc, char **argv)
 {
-    logger("INFO", "Welcome to lwm");
-    Display *display = XOpenDisplay(NULL);
-    Window rootw = DefaultRootWindow(display);
-
-    Window root_return, parent_return, *children_return;
-    uint32_t nchildren_return;
-
-    Status status = XQueryTree(display, rootw, &root_return, &parent_return, &children_return, &nchildren_return);
-    if (status == 0)
+    Display *display = NULL;
+    if (argc > 1)
     {
-        logger(LOG_ERROR, "XQueryTree failed.");
+        logger("ERROR", "too many arguments");
+        exit(EXIT_FAILURE);
+    }
+    
+    if(!(display = XOpenDisplay(NULL)))
+    {
+        log_error("cannot open display");
         exit(EXIT_FAILURE);
     }
 
-    for (uint32_t i = 0; i < nchildren_return; i++)
-    {
-        print_window_attributes(display, &children_return[i]);
-    }
-
-    XCloseDisplay(display);
+    checkwm(display);
+    while(True);
+    return 0;
 }
