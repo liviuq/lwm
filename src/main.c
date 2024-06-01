@@ -5,7 +5,6 @@
 #include <time.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include <pthread.h>
 
 #include "logger.h"
 #include "check.h"
@@ -14,10 +13,6 @@
 int
 main(int argc, char **argv)
 {
-    pthread_mutex_t mut;
-    pthread_mutex_lock(&mut);
-    pthread_mutex_unlock(&mut);
-    
     Display *display = NULL;
     if (argc > 1)
     {
