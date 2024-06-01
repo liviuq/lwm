@@ -15,15 +15,16 @@ checkwm(Display *display)
     XSync(display, False);
 }
 
-static int
+int
 xerrorstart(Display *display, XErrorEvent *ee)
 {
     log_error("another wm is already running");
     exit(EXIT_FAILURE);
 }
 
-static int
+int
 xerror(Display *display, XErrorEvent *ee)
 {
-    logger("INFO", ee->error_code);
+    logger("INFO", "xerror");
+    return ee->error_code;
 }
