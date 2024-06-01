@@ -1,1 +1,0 @@
-sources = files('logger.c', 'main.c', 'window.c', 'check.c')
